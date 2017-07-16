@@ -1,0 +1,27 @@
+<include file="Public/header" />
+
+<title>执行结果</title>
+<block name="main">
+
+    <div class="container-fluid">
+
+        <div class="conent col-md-offset-1 col-md-10 ">
+            <div class="panel panel-default">
+                <div class="panel-heading"><h3>自动{$msg}数据</h3></div>
+                <div class="panel-body">
+                    <h4>{$msg}成功</h4>
+
+                    <button type="button" onclick="javascript:history.back(-1)" class="btn btn-danger">返回上一页</button>
+
+                    <a href="{:U('Index')}">
+                    <button type="button" class="btn btn-danger">返回首页</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</block>
+
+<include file="Public/footer" />

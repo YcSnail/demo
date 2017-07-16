@@ -1,0 +1,104 @@
+<include file="Public/header"/>
+
+<title>{$list['name']}自动执行</title>
+<block name="main">
+
+    <div class="container-fluid">
+
+        <div class="conent col-md-offset-1 col-md-10 ">
+            <div class="panel panel-default">
+                <div class="panel-heading"><h3>Liunx自动执行</h3></div>
+                <div class="panel-body">
+
+                    <a href="{:U('Index/LiunxFixedCreate')}">
+                        <button type="button" class="btn btn-success">生成一些数据</button>
+                    </a>
+
+                    <a href="{:U('Index/LiunxFixedDel')}">
+                        <button type="button" class="btn btn-success">清空数据</button>
+                    </a>
+
+                    <div class="layui-tab">
+                        <ul class="layui-tab-title">
+                            <li class="layui-this">未执行</li>
+                            <li>已执行</li>
+                        </ul>
+                        <div class="layui-tab-content">
+                            <div class="layui-tab-item layui-show">
+                                <p>
+                                    Liunx文件后台自动执行,超过60秒,自动更改 状态为已完成.
+                                </p>
+                                <p>
+                                    <span style="color: #ff0000">
+                                    */1 * * * *  curl http://demo.yuanxu.top/Home/Index/LiunxAuto
+                                    </span>
+                                </p>
+                                <p>
+                                    <span style="font-size: 8px">(真自动,基于liunx每分钟自动执行)</span>
+                                </p>
+                                <table class="layui-table" lay-skin="line">
+                                    <colgroup>
+                                        <col width="150">
+                                        <col width="150">
+                                        <col width="150">
+                                    </colgroup>
+                                    <thead>
+                                    <tr>
+                                        <th>序号</th>
+                                        <th>姓名</th>
+                                        <th>是否执行</th>
+                                        <th>创建时间</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <volist name="list['list']['abnormal']" id="abnormal">
+                                        <tr>
+                                            <td>{$abnormal.id}</td>
+                                            <td>{$abnormal.name}</td>
+                                            <td>{$abnormal.status}</td>
+                                            <td>{$abnormal.create_time}</td>
+                                        </tr>
+                                    </volist>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="layui-tab-item">
+                                <table class="layui-table" lay-skin="line">
+                                    <colgroup>
+                                        <col width="150">
+                                        <col width="150">
+                                        <col width="150">
+                                    </colgroup>
+                                    <thead>
+                                    <tr>
+                                        <th>序号</th>
+                                        <th>姓名</th>
+                                        <th>是否执行</th>
+                                        <th>创建时间</th>
+                                        <th>执行时间</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <volist name="list['list']['normal']" id="normal">
+                                        <tr>
+                                            <td>{$normal.id}</td>
+                                            <td>{$normal.name}</td>
+                                            <td>{$normal.status}</td>
+                                            <td>{$normal.create_time}</td>
+                                            <td>{$normal.updata_time}</td>
+                                        </tr>
+                                    </volist>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</block>
+
+<include file="Public/footer"/>
