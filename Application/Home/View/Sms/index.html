@@ -21,19 +21,18 @@
             <div class="panel panel-default">
                 <div class="panel-heading"><h3>发个短信试试</h3></div>
                 <div class="panel-body">
-                    <form class="layui-form" action="{:U('Sms/sendSms')}" method="post">
-                        <div class="layui-form-item">
-                            <label class="layui-form-label">手机号</label>
-                            <div class="layui-input-block">
-                                <input type="text" name="phone" required  lay-verify="required" placeholder="请输入手机号" autocomplete="off" class="layui-input">
-                            </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">手机号</label>
+                        <div class="layui-input-block">
+                            <input type="number" name="phone" required  lay-verify="required" placeholder="请输入手机号" autocomplete="off" class="layui-input">
                         </div>
+                    </div>
 
-                        <div class="btn-submit">
-                            <p style="color: #bfbdbd;">也别多发,又不是不要钱</p>
-                            <button class="layui-btn layui-btn-normal">走你</button>
-                        </div>
-                    </form>
+                    <div class="btn-submit">
+                        <p style="color: #bfbdbd;">也别多发,又不是不要钱</p>
+                        <p style="display: none"><span style="color: #ff0000">60</span>秒后在次发送</p>
+                        <button class="layui-btn">走你</button>
+                    </div>
                 </div>
             </div>
 
@@ -46,15 +45,32 @@
 
 <script>
 
-    $('.layui-btn-normal').click(function () {
+    $('.layui-btn').click(function () {
 
         var phone = $('.layui-input-block >input').val();
         if (phone == '' || phone == null || phone.length !=11){
-            alert('手机号输入有误');
+            show('手机号都输不对,你是不是傻');
             return false;
         }
 
-        $(this).submit()
+        var url = "{:U('Sms/sendSms')}";
+
+        $.post(
+            url,
+            {'phone':phone},
+            function(data){
+
+                if (data.code == 0){
+                    show(data.msg);
+                }else{
+
+                    show(data.msg);
+                }
+
+            }, "json"
+
+        );
+
     })
 
 </script>

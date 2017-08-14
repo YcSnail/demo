@@ -38,5 +38,67 @@ class SendSmsLogic {
         return $response;
     }
 
+    /**
+     * 记录发送
+     * @param $phone
+     */
+    public function savePhone($phone){
+
+        if (empty($phone)){
+            return;
+        }
+        $phone = intval($phone);
+
+        $smsSend = M('sms_send');
+
+        $phoneRes = $smsSend->where('phone',$phone)->find();
+
+        if (empty($phoneRes)){
+
+            $saveData = array(
+                'phone'=>$phone,
+                'create_time'=>time(),
+                'count'=>1
+            );
+            $smsSend->add($saveData);
+            return;
+
+        }else{
+
+            $phoneRes['count'] = intval($phoneRes['count']) +1;
+
+            $saveData = array(
+                'update_time'=>time(),
+                'count'=>$phoneRes['count']
+            );
+
+            $smsSend->where('phone',$phone)->save($saveData);
+            return;
+        }
+
+    }
+
+
+//    public function checkSmsSend($phone){
+//
+//        if (empty($phone)){
+//            return;
+//        }
+//
+//        $smsSend = M('sms_send');
+//
+//        $phoneRes = $smsSend->where('phone',$phone)->find();
+//
+//        if (empty($phoneRes) || empty($phoneRes['update_time']) ){
+//            return;
+//        }
+//
+//        $dateTime = $phoneRes['update_time'];
+//
+//
+//    }
+
+
+
 
 }

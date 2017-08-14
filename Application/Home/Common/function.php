@@ -38,9 +38,8 @@ function object_to_array($obj) {
  * @param string $msg
  * @param int $type
  */
-function ajaxRes($code,$msg = '',$type = 0){
-
-    $arr = empty($type) ? $arr = array('code'=>$code,'message'=>$msg) : $code ;
+function ajaxRes($code,$msg = ''){
+    $arr = array('code'=>$code,'msg'=>$msg);
     die(json_encode($arr));
 }
 
